@@ -1,4 +1,4 @@
-package memtable.mutable
+package memtable.mutable.tree
 
 sealed trait Color
 
@@ -9,4 +9,3 @@ case object Black extends Color {
   override def toString: String = "black"
 
 }
-
