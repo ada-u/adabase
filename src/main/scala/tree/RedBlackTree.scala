@@ -60,6 +60,7 @@ class RedBlackTree[V: Ordering](val tree: Option[Node[V]]) {
     def valueWithColor(branch: Branch[V]): String =
       s"${branch.value}(${branch.color})"
 
+    // bfs
     def loop(node: Node[V]): Unit =
       node match {
         case Leaf =>
