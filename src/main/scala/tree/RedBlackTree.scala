@@ -10,7 +10,7 @@ class RedBlackTree[V: Ordering](val tree: Option[Node[V]]) {
   def insert(newValue: V)(implicit ord: Ordering[V]): RedBlackTree[V] = {
 
     def build(left: Node[V], value: V, right: Node[V], color: Color): Node[V] = {
-      println(s"left: $left, value: $value, right: $right, color: $color")
+      // debug: println(s"left: $left, value: $value, right: $right, color: $color")
       (left, value, right, color) match {
         // right: red, left: red
         case (Branch(ll, lv, lr, Red), v, Branch(rl, rv, rr, Red), _) =>
@@ -27,7 +27,8 @@ class RedBlackTree[V: Ordering](val tree: Option[Node[V]]) {
         // right: red, right->left: red
         case (l, v, Branch(Branch(rll, rlv, rlr, Red), rv, rr, Red), _) =>
           Branch(Branch(l, v, rll, Black), rlv, Branch(rlr, rv, rr, Black), Red)
-        case _ => Branch(left, value, right, color)
+        case _ =>
+          Branch(left, value, right, color)
       }
     }
 
@@ -48,7 +49,7 @@ class RedBlackTree[V: Ordering](val tree: Option[Node[V]]) {
     val newTree = tree.fold[Node[V]](Branch(Leaf, newValue, Leaf, Black)) { root =>
       loop(root) match {
         case Branch(l, v, r, _) => Branch(l, v, r, Black)
-        case leaf@Leaf => leaf
+        case leaf @ Leaf        => leaf
       }
     }
 
